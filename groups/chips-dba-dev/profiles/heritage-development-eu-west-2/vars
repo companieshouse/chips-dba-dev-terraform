@@ -7,10 +7,10 @@ account = "hdev"
 region  = "euw2"
 
 # Application details
-application = "chips-dev"
+application = "chips-dba-dev"
 environment = "dev"
 oracle_unqname = "cdev"
-oracle_sid = "CHIPSDEV"
+oracle_sid = "CHIPSDBADEV"
 
 db_instance_count = 1
 db_instance_size = "m4.4xlarge"
@@ -26,7 +26,7 @@ ansible_ssm_apply_only_at_cron_interval = true
 ansible_ssm_check_schedule_expression = "cron(00 01 ? * MON *)"
 maintenance_window_schedule_expression = "cron(00 01 ? * SUN *)"
 
-netapp_ips = ["10.94.9.185", "10.94.9.123"]
+netapp_ips = ["10.104.9.158"]
 
 # CHIPS DB Security Groups
 chips_db_sg = [
