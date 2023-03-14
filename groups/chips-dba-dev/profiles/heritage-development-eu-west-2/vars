@@ -28,17 +28,8 @@ maintenance_window_schedule_expression = "cron(00 01 ? * SUN *)"
 
 netapp_ips = ["10.104.9.158"]
 
-# CHIPS DB Security Groups
-chips_db_sg = [
-  "sgr-chips-rep-db-ec2-001-*",
-  "sgr-staffware-db-ec2-001-*",
-  "sgr-chips-ef-batch-asg-001-*",
-  "sgr-chips-users-rest-asg-001-*",
-  "sgr-chips-db-batch-asg-001-*",  
-  "sgr-chips-uam-ec2-001-*",
-  "sgr-bcd-rds-001-*",
-  "sgr-ewf-rds-001-*"
-]
+# CHIPS DBA DEV Security Groups
+#chips_dba_dev_sg = ["sgr-chips-dba-dev-ec2-001-*"]
 
 ############################################
 # Log entries to be aggregated in Cloudwatch Logs
