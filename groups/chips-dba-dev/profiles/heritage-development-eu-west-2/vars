@@ -1,6 +1,6 @@
 aws_profile = "heritage-dev-eu-west-2"
 aws_region  = "eu-west-2"
-aws_account = "heritage-dev"
+aws_account = "heritage-development"
 
 # shorthand
 account = "hdev"
