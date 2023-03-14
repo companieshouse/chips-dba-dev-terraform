@@ -118,8 +118,8 @@ data "template_cloudinit_config" "userdata_config" {
   }
 }
 
-data "aws_security_group" "chips_sg" {
-  for_each = toset(var.chips_db_sg)
+data "aws_security_group" "chips_dba_dev_sg" {
+  for_each = toset(var.chips_dba_dev_sg)
   filter {
     name   = "group-name"
     values = [each.value]
