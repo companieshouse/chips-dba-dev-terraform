@@ -2,7 +2,6 @@
 # Locals
 # ------------------------------------------------------------------------
 locals {
-  internal_cidrs = values(data.vault_generic_secret.internal_cidrs.data)
 
   data_subnet_az_map = { for id, map in data.aws_subnet.data_subnets : map["availability_zone"] => map }
 
@@ -15,8 +14,6 @@ locals {
   security_kms_keys_data  = data.vault_generic_secret.security_kms_keys.data
   ssm_data                = data.vault_generic_secret.ssm.data
   chs_subnet_data         = data.vault_generic_secret.chs_subnet.data
-  onprem_app_cidrs        = jsondecode(data.vault_generic_secret.onprem_app_cidrs.data_json).cidrs
-  deployment_cidrs        = jsondecode(data.vault_generic_secret.deployment_cidrs.data_json).cidrs
 
   logs_kms_key_id        = local.kms_keys_data["logs"]
   ssm_logs_key_id        = local.kms_keys_data["ssm"]
