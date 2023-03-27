@@ -1,9 +1,9 @@
-aws_profile = "heritage-dev-eu-west-2"
+aws_profile = "heritage-staging-eu-west-2"
 aws_region  = "eu-west-2"
-aws_account = "heritage-development"
+aws_account = "heritage-staging"
 
 # shorthand
-account = "hdev"
+account = "hstg"
 region  = "euw2"
 
 # Application details
@@ -26,10 +26,7 @@ ansible_ssm_apply_only_at_cron_interval = true
 ansible_ssm_check_schedule_expression = "cron(00 01 ? * MON *)"
 maintenance_window_schedule_expression = "cron(00 01 ? * SUN *)"
 
-netapp_ips = ["10.104.9.158"]
-
-# CHIPS DBA DEV Security Groups
-#chips_dba_dev_sg = ["sgr-chips-dba-dev-ec2-001-*"]
+netapp_ips = ["10.94.9.185", "10.94.9.123"]
 
 ############################################
 # Log entries to be aggregated in Cloudwatch Logs

@@ -23,7 +23,7 @@
       to_port     = 1522
       protocol    = "tcp"
       description = "Oracle DB port"
-      cidr_blocks = join(",", concat(local.oracle_allowed_ranges, local.onprem_app_cidrs))
+      cidr_blocks = join(",", concat(local.oracle_allowed_ranges))
     },
     {
       from_port   = 1521
@@ -60,7 +60,7 @@
       from_port                = 1521
       to_port                  = 1522
       protocol                 = "tcp"
-      description              = "Oracle DB CHIPS Security Group"
+      description              = "Oracle DB CHIPS DBA Security Group"
       source_security_group_id = group
     }
   ]
@@ -97,7 +97,7 @@ resource "aws_instance" "db_ec2" {
   tags = merge(
     local.default_tags,
     tomap({
-      "Name"        = format("%s-db-%02d", var.application, count.index + 1)
+      "Name"        = format("%s-dba-dev-%02d", var.application, count.index + 1)
       "Domain"      = local.internal_fqdn,
       "UNQNAME"     = var.oracle_unqname,
       "SID"         = var.oracle_sid,
@@ -121,7 +121,7 @@ resource "aws_instance" "db_ec2" {
   encrypted = true
 
   tags = {
-    Name = "oltp-logical-standby"
+    Name = "dba-dev-db"
   }
     depends_on = [
     aws_instance.db_ec2
@@ -141,7 +141,7 @@ resource "aws_route53_record" "db_dns" {
   count = var.db_instance_count
 
   zone_id = data.aws_route53_zone.private_zone.zone_id
-  name    = format("%s-db-%02d", var.application, count.index + 1)
+  name    = format("%s-dba-dev-%02d", var.application, count.index + 1)
   type    = "A"
   ttl     = "300"
   records = [aws_instance.db_ec2[count.index].private_ip]
@@ -149,7 +149,7 @@ resource "aws_route53_record" "db_dns" {
 
 resource "aws_route53_record" "dns_cname" {
   zone_id = data.aws_route53_zone.private_zone.zone_id
-  name    = format("%s-db", var.application)
+  name    = format("%s-dba-dev", var.application)
   type    = "CNAME"
   ttl     = "300"
   records = [format("%s-db-01.%s", var.application, local.internal_fqdn)]
