@@ -265,7 +265,7 @@ variable "netapp_ips" {
 # CHIPS DB SG variables
 # ------------------------------------------------------------------------------
 variable "chips_dba_dev_sg" {
-  type        = list(string)
+  type        = list(any)
   description = "List of CHIPS DBA DEV Security Groups"
   default     = []
 }
