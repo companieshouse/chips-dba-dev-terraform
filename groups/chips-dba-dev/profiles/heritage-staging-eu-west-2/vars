@@ -8,9 +8,9 @@ region  = "euw2"
 
 # Application details
 application = "chips-dba-dev"
-environment = "dev"
-oracle_unqname = "cdev"
-oracle_sid = "CHIPSDBADEV"
+environment = "staging"
+# oracle_unqname = "cdev"
+# oracle_sid = "CHIPSDBADEV"
 
 db_instance_count = 1
 db_instance_size = "m4.4xlarge"

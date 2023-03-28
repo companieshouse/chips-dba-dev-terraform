@@ -3,7 +3,7 @@
 # EC2 Sec Group
 # ------------------------------------------------------------------------------
 
-  module "db_ec2_security_group" {
+module "db_ec2_security_group" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "~> 3.0"
 
@@ -26,29 +26,8 @@
       to_port     = 1522
       protocol    = "tcp"
       description = "Oracle DB port"
-      cidr_blocks = join(",", concat(local.oracle_allowed_ranges))
+      cidr_blocks = join(",", local.oracle_allowed_ranges)
     },
-    # {
-    #   from_port   = 1521
-    #   to_port     = 1522
-    #   protocol    = "tcp"
-    #   description = "Oracle DB port"
-    #   cidr_blocks = local.chs_subnet_data["mm-platform-applications-eu-west-2a"]
-    # },
-    # {
-    #   from_port   = 1521
-    #   to_port     = 1522
-    #   protocol    = "tcp"
-    #   description = "Oracle DB port"
-    #   cidr_blocks = local.chs_subnet_data["mm-platform-applications-eu-west-2b"]
-    # },
-    # {
-    #   from_port   = 1521
-    #   to_port     = 1522
-    #   protocol    = "tcp"
-    #   description = "Oracle DB port"
-    #   cidr_blocks = local.chs_subnet_data["mm-platform-applications-eu-west-2c"]
-    # },
     {
       from_port   = 22
       to_port     = 22
