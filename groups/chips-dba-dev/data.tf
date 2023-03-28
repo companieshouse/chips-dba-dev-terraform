@@ -110,13 +110,13 @@ data "template_cloudinit_config" "userdata_config" {
   }
 }
 
-data "aws_security_group" "chips_dba_dev_sg" {
-  for_each = toset(var.chips_dba_dev_sg)
-  filter {
-    name   = "group-name"
-    values = [each.value]
-  }
-}
+# data "aws_security_group" "chips_dba_dev_sg" {
+#   for_each = toset(var.chips_dba_dev_sg)
+#   filter {
+#     name   = "group-name"
+#     values = [each.value]
+#   }
+# }
 
 data "vault_generic_secret" "chs_subnet" {
   path = "aws-accounts/network/${var.aws_account}/chs/application-subnets"

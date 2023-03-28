@@ -17,6 +17,9 @@
     }
   ]
 
+  ingress_cidr_blocks = local.oracle_allowed_ranges
+  ingress_rules       = ["oracle-db-tcp"]
+
   ingress_with_cidr_blocks = [
     {
       from_port   = 1521
@@ -25,27 +28,27 @@
       description = "Oracle DB port"
       cidr_blocks = join(",", concat(local.oracle_allowed_ranges))
     },
-    {
-      from_port   = 1521
-      to_port     = 1522
-      protocol    = "tcp"
-      description = "Oracle DB port"
-      cidr_blocks = local.chs_subnet_data["mm-platform-applications-eu-west-2a"]
-    },
-    {
-      from_port   = 1521
-      to_port     = 1522
-      protocol    = "tcp"
-      description = "Oracle DB port"
-      cidr_blocks = local.chs_subnet_data["mm-platform-applications-eu-west-2b"]
-    },
-    {
-      from_port   = 1521
-      to_port     = 1522
-      protocol    = "tcp"
-      description = "Oracle DB port"
-      cidr_blocks = local.chs_subnet_data["mm-platform-applications-eu-west-2c"]
-    },
+    # {
+    #   from_port   = 1521
+    #   to_port     = 1522
+    #   protocol    = "tcp"
+    #   description = "Oracle DB port"
+    #   cidr_blocks = local.chs_subnet_data["mm-platform-applications-eu-west-2a"]
+    # },
+    # {
+    #   from_port   = 1521
+    #   to_port     = 1522
+    #   protocol    = "tcp"
+    #   description = "Oracle DB port"
+    #   cidr_blocks = local.chs_subnet_data["mm-platform-applications-eu-west-2b"]
+    # },
+    # {
+    #   from_port   = 1521
+    #   to_port     = 1522
+    #   protocol    = "tcp"
+    #   description = "Oracle DB port"
+    #   cidr_blocks = local.chs_subnet_data["mm-platform-applications-eu-west-2c"]
+    # },
     {
       from_port   = 22
       to_port     = 22
@@ -55,15 +58,15 @@
     }
   ]
 
-  ingress_with_source_security_group_id = [for group in local.source_security_group_id :
-    {
-      from_port                = 1521
-      to_port                  = 1522
-      protocol                 = "tcp"
-      description              = "Oracle DB CHIPS DBA Security Group"
-      source_security_group_id = group
-    }
-  ]
+  # ingress_with_source_security_group_id = [for group in local.source_security_group_id :
+  #   {
+  #     from_port                = 1521
+  #     to_port                  = 1522
+  #     protocol                 = "tcp"
+  #     description              = "Oracle DB CHIPS DBA Security Group"
+  #     source_security_group_id = group
+  #   }
+  # ]
 
   egress_rules = ["all-all"]
 }

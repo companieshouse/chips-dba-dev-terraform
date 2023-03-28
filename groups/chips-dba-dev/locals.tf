@@ -73,7 +73,7 @@ locals {
     TimeoutSeconds     = "3600"
   }
 
-  source_security_group_id = [for item in data.aws_security_group.chips_dba_dev_sg : item.id]
+ # source_security_group_id = [for item in data.aws_security_group.chips_dba_dev_sg : item.id]
 
   default_tags = {
     Terraform   = "true"
