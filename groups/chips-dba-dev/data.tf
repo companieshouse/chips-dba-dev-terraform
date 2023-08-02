@@ -52,6 +52,18 @@ data "vault_generic_secret" "internal_cidrs" {
   path = "aws-accounts/network/internal_cidr_ranges"
 }
 
+data "vault_generic_secret" "dev_data_cidrs" {
+  path = "aws-accounts/network/ch-development/heritage/data-subnets"
+}
+
+data "vault_generic_secret" "dev_application_cidrs" {
+  path = "aws-accounts/network/ch-development/heritage/application-subnets"
+}
+
+data "vault_generic_secret" "chs_application_cidrs" {
+  path = "aws-accounts/network/heritage-development/chs/application-subnets"
+}
+
 data "vault_generic_secret" "ec2_data" {
   path = "applications/${var.aws_account}-${var.aws_region}/${var.application}/db/ec2"
 }
