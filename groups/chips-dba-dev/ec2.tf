@@ -37,6 +37,26 @@ module "db_ec2_security_group" {
     }
   ]
 
+  ingress_for_netapp_snapcenter_host_agent = [
+    {
+      from_port   = 8145
+      to_port     = 8145
+      protocol    = "tcp"
+      description = "NetApp SnapCenter Host Agent Port"
+      cidr_blocks = local.snapcenter_ip
+    }
+  ]
+
+  ingress_for_netapp_snapcenter_server_port = [
+    {
+      from_port   = 8146
+      to_port     = 8146
+      protocol    = "tcp"
+      description = "NetApp SnapCenter Server Port"
+      cidr_blocks = local.snapcenter_ip
+    }
+  ]
+
   # ingress_with_source_security_group_id = [for group in local.source_security_group_id :
   #   {
   #     from_port                = 1521
