@@ -4,7 +4,7 @@ resource "aws_sns_topic" "chips-dev_topic" {
 
 resource "aws_sns_topic_subscription" "chips-dev_Subscription" {
   topic_arn = aws_sns_topic.chips-dev_topic.arn
-  for_each  = toset(["unix-support@companieshouse.gov.uk"])
+  for_each  = toset(["unixsupport@companieshouse.gov.uk"])
   protocol  = "email"
   endpoint  = each.value
 
