@@ -34,23 +34,27 @@ module "db_ec2_security_group" {
       protocol    = "tcp"
       description = "SSH ports"
       cidr_blocks = join(",", local.ssh_allowed_ranges)
-    },
-    {
-      from_port   = 8145
-      to_port     = 8145
-      protocol    = "tcp"
-      description = "NetApp SnapCenter Host Agent Port"
-      cidr_blocks = join(",", local.snapcenter_ip)
-    },
-    {
-      from_port   = 8146
-      to_port     = 8146
-      protocol    = "tcp"
-      description = "NetApp SnapCenter Server Port"
-      cidr_blocks = join(",", local.snapcenter_ip)
     }
+    # ,
+    # {
+    #   from_port   = 8145
+    #   to_port     = 8145
+    #   protocol    = "tcp"
+    #   description = "NetApp SnapCenter Host Agent Port"
+    #   cidr_blocks = join(",", local.snapcenter_ip)
+    # },
+    # {
+    #   from_port   = 8146
+    #   to_port     = 8146
+    #   protocol    = "tcp"
+    #   description = "NetApp SnapCenter Server Port"
+    #   cidr_blocks = join(",", local.snapcenter_ip)
+    # }
 
   ]
+
+
+
 
   # ingress_with_source_security_group_id = [for group in local.source_security_group_id :
   #   {
@@ -112,6 +116,30 @@ resource "aws_instance" "db_ec2" {
   }
 }
 
+# ADDITIONAL EBS DISK NOT REQUIRED - USING NETAPP
+  resource "aws_ebs_volume" "u-drive" {
+  availability_zone = "eu-west-2a"
+  size = 256
+  type = "gp3"
+  encrypted = true
+
+  tags = {
+    Name = "dba-dev-db"
+  }
+    depends_on = [
+    aws_instance.db_ec2
+  ]
+}
+
+resource "aws_volume_attachment" "ebs_attach" {
+  count = var.db_instance_count
+
+  device_name = "/dev/xvds"
+  volume_id   = aws_ebs_volume.u-drive.id
+  instance_id = aws_instance.db_ec2[count.index].id
+
+}
+
 resource "aws_route53_record" "db_dns" {
   count = var.db_instance_count
 
@@ -122,14 +150,14 @@ resource "aws_route53_record" "db_dns" {
   records = [aws_instance.db_ec2[count.index].private_ip]
 }
 
-resource "aws_route53_record" "dns_cname" {
-  zone_id = data.aws_route53_zone.private_zone.zone_id
-  name    = format("%s", var.application)
-  type    = "CNAME"
-  ttl     = "300"
-  records = [format("%s-01.%s", var.application, local.internal_fqdn)]
-  lifecycle {
-    #Ignore changes to the record value, this may be changed outside of terraform 
-    ignore_changes = [records]
-  }
-}
+# resource "aws_route53_record" "dns_cname" {
+#   zone_id = data.aws_route53_zone.private_zone.zone_id
+#   name    = format("%s", var.application)
+#   type    = "CNAME"
+#   ttl     = "300"
+#   records = [format("%s-01.%s", var.application, local.internal_fqdn)]
+#   lifecycle {
+#     #Ignore changes to the record value, this may be changed outside of terraform 
+#     ignore_changes = [records]
+#   }
+# }
