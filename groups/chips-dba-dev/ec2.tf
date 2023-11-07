@@ -53,19 +53,6 @@ module "db_ec2_security_group" {
 
   ]
 
-
-
-
-  # ingress_with_source_security_group_id = [for group in local.source_security_group_id :
-  #   {
-  #     from_port                = 1521
-  #     to_port                  = 1522
-  #     protocol                 = "tcp"
-  #     description              = "Oracle DB CHIPS DBA Security Group"
-  #     source_security_group_id = group
-  #   }
-  # ]
-
   egress_rules = ["all-all"]
 }
 
