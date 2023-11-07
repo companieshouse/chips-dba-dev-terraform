@@ -33,7 +33,7 @@ module "db_ec2_security_group" {
       to_port     = 22
       protocol    = "tcp"
       description = "SSH ports"
-      cidr_blocks = join(",", local.ssh_allowed_ranges)
+      cidr_blocks = join(",", local.ssh_allowed_ranges, local.snapcenter_ip)
     }
     ,
     {
