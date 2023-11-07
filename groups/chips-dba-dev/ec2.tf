@@ -35,21 +35,21 @@ module "db_ec2_security_group" {
       description = "SSH ports"
       cidr_blocks = join(",", local.ssh_allowed_ranges)
     }
-    # ,
-    # {
-    #   from_port   = 8145
-    #   to_port     = 8145
-    #   protocol    = "tcp"
-    #   description = "NetApp SnapCenter Host Agent Port"
-    #   cidr_blocks = join(",", local.snapcenter_ip)
-    # },
-    # {
-    #   from_port   = 8146
-    #   to_port     = 8146
-    #   protocol    = "tcp"
-    #   description = "NetApp SnapCenter Server Port"
-    #   cidr_blocks = join(",", local.snapcenter_ip)
-    # }
+    ,
+    {
+      from_port   = 8145
+      to_port     = 8145
+      protocol    = "tcp"
+      description = "NetApp SnapCenter Host Agent Port"
+      cidr_blocks = join(",", local.snapcenter_ip)
+    },
+    {
+      from_port   = 8146
+      to_port     = 8146
+      protocol    = "tcp"
+      description = "NetApp SnapCenter Server Port"
+      cidr_blocks = join(",", local.snapcenter_ip)
+    }
 
   ]
 
