@@ -3,7 +3,7 @@
 # ------------------------------------------------------------------------
 locals {
   snapcenter_ip = values(data.vault_generic_secret.netapp_snapcenter_ip.data)
-  chips_staging= values(data.vault_generic_secret.chips_staging.data)
+  chips_staging_rep= values(data.vault_generic_secret.chips_staging_rep.data)
   internal_cidrs = values(data.vault_generic_secret.internal_cidrs.data)
   dev_data_cidrs = values(data.vault_generic_secret.dev_data_cidrs.data)
   dev_application_cidrs = values(data.vault_generic_secret.dev_application_cidrs.data)
