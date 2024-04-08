@@ -71,6 +71,10 @@ data "vault_generic_secret" "cdp_dev_data_cidrs" {
   path = "aws-accounts/network/ch-cdp-development/data-subnets"
 }
 
+data "vault_generic_secret" "chips_staging" {
+  path = "applications/${var.aws_account}-${var.aws_region}/${var.application}/db/chips-staging"
+}
+
 data "vault_generic_secret" "ec2_data" {
   path = "applications/${var.aws_account}-${var.aws_region}/${var.application}/db/ec2"
 }
