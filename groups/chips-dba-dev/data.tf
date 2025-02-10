@@ -71,6 +71,10 @@ data "vault_generic_secret" "cdp_dev_data_cidrs" {
   path = "aws-accounts/network/ch-cdp-development/data-subnets"
 }
 
+data "vault_generic_secret" "ch_dev_mgmt_cidrs" {
+  path = "/aws-accounts/network/ch-development-private-management-cidrs"
+}
+
 data "vault_generic_secret" "staging_dbs" {
   path = "applications/${var.aws_account}-${var.aws_region}/${var.application}/stagingdbs"
 }
