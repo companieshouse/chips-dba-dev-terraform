@@ -34,8 +34,14 @@ locals {
   backup_bucket_name          = "${var.application}-backup-${var.aws_account}-${var.aws_region}"
 
   internal_fqdn = format("%s.%s.aws.internal", split("-", var.aws_account)[1], split("-", var.aws_account)[0])
+  
+  shared_services_management_cidrs = flatten([
+    for entry in data.aws_ec2_managed_prefix_list.shared_services_cidrs.entries : [
+      entry.cidr
+    ]
+  ])
 
-  oracle_allowed_ranges = concat(local.internal_cidrs, var.vpc_sg_cidr_blocks_oracle, local.dev_data_cidrs, local.dev_application_cidrs, local.chs_application_cidrs, local.cdp_dev_data_cidrs, local.ch_dev_mgmt_cidrs)
+  oracle_allowed_ranges = concat(local.internal_cidrs, var.vpc_sg_cidr_blocks_oracle, local.dev_data_cidrs, local.dev_application_cidrs, local.chs_application_cidrs, local.cdp_dev_data_cidrs, local.ch_dev_mgmt_cidrs, local.shared_services_management_cidrs)
   ssh_allowed_ranges    = concat(local.internal_cidrs, var.vpc_sg_cidr_blocks_ssh)
 
   iscsi_initiator_names = split(",", local.ec2_data["iscsi-initiator-names"])
