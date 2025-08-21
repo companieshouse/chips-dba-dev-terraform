@@ -2,14 +2,15 @@
 # Locals
 # ------------------------------------------------------------------------
 locals {
-  snapcenter_ip = values(data.vault_generic_secret.netapp_snapcenter_ip.data)
-  staging_dbs = values(data.vault_generic_secret.staging_dbs.data)
-  internal_cidrs = values(data.vault_generic_secret.internal_cidrs.data)
-  dev_data_cidrs = values(data.vault_generic_secret.dev_data_cidrs.data)
+  snapcenter_ip         = values(data.vault_generic_secret.netapp_snapcenter_ip.data)
+  staging_dbs           = values(data.vault_generic_secret.staging_dbs.data)
+  internal_cidrs        = values(data.vault_generic_secret.internal_cidrs.data)
+  dev_data_cidrs        = values(data.vault_generic_secret.dev_data_cidrs.data)
   dev_application_cidrs = values(data.vault_generic_secret.dev_application_cidrs.data)
   chs_application_cidrs = values(data.vault_generic_secret.chs_application_cidrs.data)
-  cdp_dev_data_cidrs = values(data.vault_generic_secret.cdp_dev_data_cidrs.data)
-  ch_dev_mgmt_cidrs = values(data.vault_generic_secret.ch_dev_mgmt_cidrs.data)
+  cdp_dev_data_cidrs    = values(data.vault_generic_secret.cdp_dev_data_cidrs.data)
+  ch_dev_mgmt_cidrs     = values(data.vault_generic_secret.ch_dev_mgmt_cidrs.data)
+  chips_rds             = values(data.vault_generic_secret.chipsdb_rds.data)
 
   data_subnet_az_map = { for id, map in data.aws_subnet.data_subnets : map["availability_zone"] => map }
 

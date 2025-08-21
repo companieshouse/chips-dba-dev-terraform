@@ -26,7 +26,7 @@ module "db_ec2_security_group" {
       to_port     = 1522
       protocol    = "tcp"
       description = "Oracle DB port"
-      cidr_blocks = join(",", local.oracle_allowed_ranges, local.staging_dbs)
+      cidr_blocks = join(",", local.oracle_allowed_ranges, local.staging_dbs, local.chips_rds)
     },
     {
       from_port   = 22

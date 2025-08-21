@@ -156,3 +156,7 @@ data "vault_generic_secret" "sns_url" {
 data "aws_ec2_managed_prefix_list" "shared_services_cidrs" {
   name = "shared-services-management-cidrs"
 }
+
+data "vault_generic_secret" "chipsdb_rds" {
+  path = "applications/${var.aws_account}-${var.aws_region}/${var.application}/dev-rds"
+}
