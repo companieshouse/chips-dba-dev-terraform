@@ -40,7 +40,7 @@ data "aws_subnet" "application" {
 }
 
 data "vault_generic_secret" "ami_owner" {
-  path = "/applications/${var.aws_account}-${var.aws_region}/chips-training"
+  path = "/aws-accounts/account-ids"
 }
 
 data "aws_ami" "oracle_12_ami" {
@@ -75,15 +75,15 @@ data "vault_generic_secret" "security_kms_keys" {
 }
 
 data "vault_generic_secret" "oem_monitoring" {
-  path  = "/applications/${var.aws_account}-${var.aws_region}/chips-training"
+  path  = "/applications/${var.aws_account}-${var.aws_region}/${var.service}/oracle-inbound"
 }
 
 data "vault_generic_secret" "stf_rds" {
-  path  = "/applications/${var.aws_account}-${var.aws_region}/chips-training"
+  path  = "/applications/${var.aws_account}-${var.aws_region}/${var.service}/oracle-inbound"
 }
 
 data "vault_generic_secret" "iscsi_init" {
-  path  = "/applications/${var.aws_account}-${var.aws_region}/chips-training"
+  path  = "/applications/${var.aws_account}-${var.aws_region}/${var.service}/${var.service_subtype}"
 }
 
 data "vault_generic_secret" "sns_email" {
@@ -95,7 +95,11 @@ data "vault_generic_secret" "sns_url" {
 }
 
 data "vault_generic_secret" "master_public_key" {
-  path = "/applications/${var.aws_account}-${var.aws_region}/chips-training/"
+  path = "/applications/${var.aws_account}-${var.aws_region}/${var.service}/${var.service_subtype}"
+}
+
+data "vault_generic_secret" "staging_dbs" {
+  path = "applications/${var.aws_account}-${var.aws_region}/${var.service}/stagingdbs"
 }
 
 data "vault_generic_secret" "netapp_snapcenter" {

@@ -21,7 +21,6 @@ locals {
   ssm_kms_key_id         = local.security_kms_keys_data.session-manager-kms-key-arn
 
   account_ids_secrets = jsondecode(data.vault_generic_secret.account_ids.data_json)
-  chips_training_ami_owner_id = local.account_ids_secrets["heritage-staging"]
 
   aws_kms       = nonsensitive(data.vault_generic_secret.aws_kms_key.data)
   aws_kms_key   = local.aws_kms["ebs"]
@@ -30,10 +29,10 @@ locals {
   linux_sns_email  = local.sns_email_secret["linux-email"]
 
   ami_owner = data.vault_generic_secret.ami_owner.data
-  ami_owner_id = local.ami_owner["ami_owner"]
+  ami_owner_id = local.ami_owner["development"]
 
   iscsi_init = data.vault_generic_secret.iscsi_init.data
-  iscsi_initiator_names = split(",", local.iscsi_init["iscsi-initiator-names"])
+  iscsi_initiator_names = local.iscsi_init["iscsi-initiator"]
 
   public_key = data.vault_generic_secret.master_public_key.data
   master_public_key = local.public_key["public_key"]
