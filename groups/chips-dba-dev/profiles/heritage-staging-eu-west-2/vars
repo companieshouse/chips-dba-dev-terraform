@@ -64,3 +64,4 @@ cloudwatch_logs = {
     log_group_retention = 180
   }
 }
+
