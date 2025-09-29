@@ -19,12 +19,25 @@ module "instance_profile" {
         "cloudwatch:PutMetricData"
       ]
     },
+    
+    {
+      sid = "CloudWatchLogWrite"
+      effect = "Allow"
+      resources = ["arn:aws:logs:*"]
+      actions = [
+        "logs:CreateLogStream",
+        "logs:PutLogEvents",
+        "logs:PutLogEventsBatch",
+        "logs:CreateLogGroup"
+      ]
+    },
 
     {
-      sid       = "AllowDescribeTags",
+      sid       = "AllowDescribe",
       effect    = "Allow",
       resources = ["*"],
       actions = [
+        "ec2:DescribeInstances",
         "ec2:DescribeTags"
       ]
     },
