@@ -2,6 +2,8 @@ aws_profile = "heritage-staging-eu-west-2"
 aws_region  = "eu-west-2"
 aws_account = "heritage-staging"
 
+repo = "chips-dba-dev-terraform"
+
 # shorthand
 account = "hstg"
 region  = "euw2"

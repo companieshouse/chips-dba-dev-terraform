@@ -64,6 +64,12 @@ variable "domain_name" {
   description = "Domain Name for ACM Certificate"
 }
 
+variable "repo" {
+  description = "Github Repository where code resides"
+  type        = string
+  default     = ""
+}
+
 
 # ------------------------------------------------------------------------------
 # EC2 Variables
