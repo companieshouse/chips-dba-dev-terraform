@@ -190,3 +190,9 @@ variable "ora5_device_name" {
   description = "The device name for the ebs device"
   type        = string
 }
+
+variable "repo" {
+  description = "Github Repository where code resides"
+  type        = string
+  default     = ""
+}
