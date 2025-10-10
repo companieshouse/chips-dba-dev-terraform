@@ -8,6 +8,15 @@ resource "aws_security_group" "dba_dev_ora12" {
   })
 }
 
+resource "aws_vpc_security_group_ingress_rule" "dba_dev_ora12_admin_ssh" {
+  description       = "Allow SSH connectivity from admin ranges"
+  security_group_id = aws_security_group.dba_dev_ora12.id
+  prefix_list_id    = data.aws_ec2_managed_prefix_list.administration_cidr_ranges.id
+  ip_protocol       = "tcp"
+  from_port         = 22
+  to_port           = 22
+}
+
 resource "aws_vpc_security_group_ingress_rule" "dba_dev_ora12_ssh" {
   description       = "Allow SSH connectivity for application deployments"
   security_group_id = aws_security_group.dba_dev_ora12.id
