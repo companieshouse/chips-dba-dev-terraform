@@ -36,8 +36,8 @@ locals {
   iscsi_init = data.vault_generic_secret.iscsi_init.data
   iscsi_initiator_names = local.iscsi_init["iscsi-initiator"]
 
-  public_key = data.vault_generic_secret.master_public_key.data
-  master_public_key = local.public_key["public_key"]
+  public_key = nonsensitive(data.vault_generic_secret.public_key.data)
+  instance_public_key = base64decode(local.public_key["public_key"])
 
   root_disk_device = "nvme0n1p4"
   
