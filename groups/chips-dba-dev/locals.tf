@@ -40,7 +40,7 @@ locals {
     ]
   ])
 
-    admin_prefix_cidrs = flatten([
+  admin_prefix_cidrs = flatten([
     for entry in data.aws_ec2_managed_prefix_list.admin.entries : [
       entry.cidr
     ]
