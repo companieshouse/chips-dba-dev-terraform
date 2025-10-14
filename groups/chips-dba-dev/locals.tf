@@ -40,12 +40,6 @@ locals {
     ]
   ])
 
-  admin_prefix_cidrs = flatten([
-    for entry in data.aws_ec2_managed_prefix_list.admin.entries : [
-      entry.cidr
-    ]
-  ])
-
   oracle_allowed_ranges = concat(local.shared_services_management_cidrs, var.vpc_sg_cidr_blocks_oracle, local.dev_data_cidrs, local.dev_application_cidrs, local.chs_application_cidrs, local.cdp_dev_data_cidrs, local.ch_dev_mgmt_cidrs, local.shared_services_management_cidrs)
   ssh_allowed_ranges    = concat(local.shared_services_management_cidrs, var.vpc_sg_cidr_blocks_ssh)
 
