@@ -51,10 +51,6 @@ data "vault_generic_secret" "netapp_snapcenter_ip" {
   path = "aws-accounts/network/netapp-snapcenter"
 }
 
-data "vault_generic_secret" "internal_cidrs" {
-  path = "aws-accounts/network/internal_cidr_ranges"
-}
-
 data "vault_generic_secret" "dev_data_cidrs" {
   path = "aws-accounts/network/ch-development/heritage/data-subnets"
 }
@@ -155,4 +151,8 @@ data "vault_generic_secret" "sns_url" {
 
 data "aws_ec2_managed_prefix_list" "shared_services_cidrs" {
   name = "shared-services-management-cidrs"
+}
+
+data "aws_ec2_managed_prefix_list" "admin" {
+  name = "administration-cidr-ranges"
 }
