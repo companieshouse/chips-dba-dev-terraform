@@ -16,7 +16,7 @@ module "db_ec2_security_group" {
       rule = "all-all"
     }
   ]
- 
+
   ingress_cidr_blocks = local.oracle_allowed_ranges
   ingress_rules       = ["oracle-db-tcp"]
 
