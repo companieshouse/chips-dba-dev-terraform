@@ -4,6 +4,8 @@ resource "aws_instance" "dba_dev_ora12" {
   ami           = data.aws_ami.oracle_12_ami.id
   instance_type = var.instance_type
   subnet_id     = element(local.application_subnet_ids_by_az, count.index) # use 'element' function for wrap-around behaviour
+  key_name      = aws_key_pair.dba_dev_ora12.key_name
+  
 
   iam_instance_profile   = module.instance_profile.aws_iam_instance_profile.name
   vpc_security_group_ids = [aws_security_group.dba_dev_ora12.id]
@@ -54,7 +56,7 @@ resource "aws_volume_attachment" "ora1_att" {
   instance_id = aws_instance.dba_dev_ora12[0].id
 }
 
-resource "aws_key_pair" "master" {
+resource "aws_key_pair" "dba_dev_ora12" {
  key_name   = "${local.common_resource_name}-master"
- public_key = local.master_public_key
+ public_key = local.instance_public_key
 }
