@@ -4,7 +4,6 @@
 locals {
   snapcenter_ip         = values(data.vault_generic_secret.netapp_snapcenter_ip.data)
   staging_dbs           = values(data.vault_generic_secret.staging_dbs.data)
-  internal_cidrs        = values(data.vault_generic_secret.internal_cidrs.data)
   dev_data_cidrs        = values(data.vault_generic_secret.dev_data_cidrs.data)
   dev_application_cidrs = values(data.vault_generic_secret.dev_application_cidrs.data)
   chs_application_cidrs = values(data.vault_generic_secret.chs_application_cidrs.data)
@@ -41,8 +40,8 @@ locals {
     ]
   ])
 
-  oracle_allowed_ranges = concat(local.internal_cidrs, var.vpc_sg_cidr_blocks_oracle, local.dev_data_cidrs, local.dev_application_cidrs, local.chs_application_cidrs, local.cdp_dev_data_cidrs, local.ch_dev_mgmt_cidrs, local.shared_services_management_cidrs)
-  ssh_allowed_ranges    = concat(local.internal_cidrs, var.vpc_sg_cidr_blocks_ssh)
+  oracle_allowed_ranges = concat(var.vpc_sg_cidr_blocks_oracle, local.dev_data_cidrs, local.dev_application_cidrs, local.chs_application_cidrs, local.cdp_dev_data_cidrs, local.ch_dev_mgmt_cidrs, local.shared_services_management_cidrs)
+  ssh_allowed_ranges    = var.vpc_sg_cidr_blocks_ssh
 
   iscsi_initiator_names = split(",", local.ec2_data["iscsi-initiator-names"])
 

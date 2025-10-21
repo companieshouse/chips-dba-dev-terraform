@@ -56,6 +56,28 @@ module "db_ec2_security_group" {
   egress_rules = ["all-all"]
 }
 
+resource "aws_security_group_rule" "admin_ingress_ssh" {
+
+  description       = "Permit SSH port access from admin prefix list"
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  prefix_list_ids   = [data.aws_ec2_managed_prefix_list.admin.id]
+  security_group_id = module.db_ec2_security_group.this_security_group_id
+}
+
+resource "aws_security_group_rule" "admin_ingress_db" {
+
+  description       = "Permit Oracle DB port access from admin prefix list"
+  type              = "ingress"
+  from_port         = 1521
+  to_port           = 1522
+  protocol          = "tcp"
+  prefix_list_ids   = [data.aws_ec2_managed_prefix_list.admin.id]
+  security_group_id = module.db_ec2_security_group.this_security_group_id
+}
+
 # ------------------------------------------------------------------------------
 # EC2
 # ------------------------------------------------------------------------------
