@@ -56,7 +56,7 @@ resource "aws_volume_attachment" "ora1_att" {
   instance_id = aws_instance.dba_dev_ora12[0].id
 }
 
-resource "aws_key_pair" "dba_dev_ora12" {
- key_name   = "${local.common_resource_name}-master"
- public_key = local.instance_public_key
-}
+# resource "aws_key_pair" "master" {
+#  key_name   = "${local.common_resource_name}-master"
+#  public_key = local.instance_public_key
+# }

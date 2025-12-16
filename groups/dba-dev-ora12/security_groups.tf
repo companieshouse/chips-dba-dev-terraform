@@ -18,7 +18,7 @@ resource "aws_vpc_security_group_ingress_rule" "dba_dev_ora12_admin_ssh" {
 }
 
 resource "aws_vpc_security_group_ingress_rule" "dba_dev_ora12_admin_1521" {
-  description       = "Allow SSH connectivity from admin ranges"
+  description       = "Allow connectivity from admin ranges on port 1521"
   security_group_id = aws_security_group.dba_dev_ora12.id
   prefix_list_id    = data.aws_ec2_managed_prefix_list.administration_cidr_ranges.id
   ip_protocol       = "tcp"
