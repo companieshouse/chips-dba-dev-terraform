@@ -66,4 +66,4 @@ cloudwatch_logs = {
     log_group_retention = 180
   }
 }
-
+chips_db_sg_exists = true

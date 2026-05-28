@@ -77,6 +77,16 @@ resource "aws_security_group_rule" "admin_ingress_db" {
   prefix_list_ids   = [data.aws_ec2_managed_prefix_list.admin.id]
   security_group_id = module.db_ec2_security_group.this_security_group_id
 }
+resource "aws_security_group_rule" "chips_db_oracle_ingress" {
+  count = var.chips_db_sg_exists ? 1 : 0
+  description       = "Permit Oracle DB port access from chips_db_sg"
+  type              = "ingress"
+  from_port         = 1521
+  to_port           = 1521
+  protocol          = "tcp"
+  source_security_group_id = data.aws_security_group.chips_db_sg[0].id 
+  security_group_id = module.db_ec2_security_group.this_security_group_id
+}
 
 # ------------------------------------------------------------------------------
 # EC2
