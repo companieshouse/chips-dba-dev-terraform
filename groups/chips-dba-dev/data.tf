@@ -156,3 +156,10 @@ data "aws_ec2_managed_prefix_list" "shared_services_cidrs" {
 data "aws_ec2_managed_prefix_list" "admin" {
   name = "administration-cidr-ranges"
 }
+data "aws_security_group" "chips_db_sg" {
+  count = var.chips_db_sg_exists ? 1 : 0
+  filter {
+    name   = "tag:Name"
+    values = ["staging-chips-db"]
+  }
+}

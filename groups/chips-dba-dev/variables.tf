@@ -257,7 +257,11 @@ variable "netapp_ips" {
   type        = list(string)
   description = "List of Netapp IP addresses to use for iscsi discovery."
 }
-
+variable "chips_db_sg_exists" {
+  description = "Boolean to toogle chips_db_sg SG lookup"
+  default     = false
+  type        = bool
+  }
 
 # ------------------------------------------------------------------------------
 # CHIPS DB SG variables
