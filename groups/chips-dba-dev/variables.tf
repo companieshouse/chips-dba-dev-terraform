@@ -271,3 +271,8 @@ variable "chips_dba_dev_sg" {
   description = "List of CHIPS DBA DEV Security Groups"
   default     = []
 }
+
+variable "training_rds_ips" {
+  type        = list(string)
+  description = "List of CHIPs Training RDS addresses"
+}
