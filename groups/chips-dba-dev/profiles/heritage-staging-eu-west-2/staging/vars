@@ -29,6 +29,10 @@ ansible_ssm_check_schedule_expression = "cron(00 01 ? * MON *)"
 maintenance_window_schedule_expression = "cron(00 01 ? * SUN *)"
 
 netapp_ips = ["10.94.9.185", "10.94.9.123"]
+training_rds_ips = [
+    "10.104.7.113/32",
+    "10.104.8.223/32"
+]
 
 ############################################
 # Log entries to be aggregated in Cloudwatch Logs
